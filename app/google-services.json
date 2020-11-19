@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "888476388129",
+    "firebase_url": "https://fun-bahasa-b0fe3.firebaseio.com",
+    "project_id": "fun-bahasa-b0fe3",
+    "storage_bucket": "fun-bahasa-b0fe3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888476388129:android:fb0114ca29f5e84fa24c60",
+        "android_client_info": {
+          "package_name": "com.android.funbahasa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888476388129-hft4vaneghcgtp87njgs7cqbll8soo8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.funbahasa",
+            "certificate_hash": "f89e8eb41b1de918db8fbad6fa070d32bc35ca42"
+          }
+        },
+        {
+          "client_id": "888476388129-9c99n9odaudeme64q6sapg6572m6i5jv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9EVdKUJmsXLaCwgbRienPJLzWP_gW0Ww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888476388129-9c99n9odaudeme64q6sapg6572m6i5jv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

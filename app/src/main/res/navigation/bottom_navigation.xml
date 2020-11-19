@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/navigation_dashboard">
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.android.funbahasa.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/dashboard_fragment" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_saved"
+            app:destination="@id/navigation_saved" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_saved"
+        android:name="com.android.funbahasa.saved.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/saved_fragment" >
+        <action
+            android:id="@+id/action_navigation_saved_to_navigation_liked"
+            app:destination="@id/navigation_liked" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_liked"
+        android:name="com.android.funbahasa.liked.LikedFragment"
+        android:label="fragment_liked"
+        tools:layout="@layout/liked_fragment" >
+        <action
+            android:id="@+id/action_navigation_liked_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.android.funbahasa.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/profile_fragment" />
+</navigation>
