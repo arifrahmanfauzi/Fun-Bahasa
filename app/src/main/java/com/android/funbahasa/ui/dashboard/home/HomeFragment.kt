@@ -32,23 +32,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun attachObserver() {
         viewModel.responseData.observe(viewLifecycleOwner, Observer { showData(it) })
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer { confLoading(it) })
         viewModel.isError.observe(viewLifecycleOwner, Observer { isError(it) })
     }
 
-    private fun confLoading(it: Boolean) {
+    private fun isLoading(it: Boolean) {
         when(it){
-            true -> binding.progressBarHome.visibility = View.INVISIBLE
-            else -> binding.progressBarHome.visibility = View.VISIBLE
+            true -> binding.progressBarHome.visibility = View.VISIBLE
+            false -> binding.progressBarHome.visibility = View.INVISIBLE
         }
     }
 
 
     private fun showData(it: ArrayList<Response>) {
-
+        isLoading(false)
+        binding.rvHome.adapter = HomeAdapter(it)
     }
 
     private fun isError(it: Throwable) {
+        isLoading(false)
         Log.d("IsError", it.localizedMessage)
     }
 

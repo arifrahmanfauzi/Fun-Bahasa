@@ -19,7 +19,6 @@ class HomeViewModel () : ViewModel(){
     fun getDataView(){
         repository.getData({
             responseData.value = it
-            isLoading.value = true
         },{
             isError.value = it
         })
