@@ -112,8 +112,9 @@
         android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="@id/imageView8"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/imageView5"
-        app:layout_constraintTop_toBottomOf="@id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:listitem="@layout/row_article" />
 
     <ProgressBar
@@ -125,6 +126,17 @@
         app:layout_constraintEnd_toEndOf="@+id/rv_Home"
         app:layout_constraintStart_toStartOf="@+id/rv_Home"
         app:layout_constraintTop_toTopOf="@+id/rv_Home" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="View All Post"
+        android:textColor="@color/blue_funbahasa"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

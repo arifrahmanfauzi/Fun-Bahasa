@@ -3,15 +3,13 @@ package com.android.funbahasa.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.android.funbahasa.R
 import com.android.funbahasa.databinding.FragmentLoginBinding
 import com.android.funbahasa.ui.dashboard.DashboardActivity
@@ -20,19 +18,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding : FragmentLoginBinding
-//    private lateinit var navControler : NavController
+    private lateinit var navControler : NavController
     private lateinit var client : GoogleSignInClient
     private lateinit var auth : FirebaseAuth
     private lateinit var viewModel : LoginViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentLoginBinding.inflate(layoutInflater)
+        val viewBinding = binding.root
+        activity?.setContentView(viewBinding)
+        navControler = Navigation.findNavController(view)
+
         initView()
         attachBtn()
         initGmail()
@@ -40,8 +41,30 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun attachObserver() {
+        viewModel.errorEdt.observe(viewLifecycleOwner, Observer { errorEdt(it) })
         viewModel.responseGoogle.observe(viewLifecycleOwner, Observer { responseGoogle(it) })
         viewModel.isError.observe(viewLifecycleOwner, Observer { isError(it) })
+        viewModel.responseEmail.observe(viewLifecycleOwner, Observer { showEmail(it) })
+    }
+
+    private fun errorEdt(error: String) {
+        when(error){
+            "email" ->{
+                binding.etLoginEmail.error = "email tidak boleh kosong"
+                binding.etLoginEmail.requestFocus()
+            }
+            "password" -> {
+                binding.etLoginPassword.error = "email tidak boleh kosong"
+                binding.etLoginPassword.requestFocus()
+            }
+        }
+    }
+
+    private fun showEmail(status: Boolean) {
+        if (status){
+            startActivity(Intent(context, DashboardActivity::class.java))
+            activity?.finish()
+        }
     }
 
     private fun isError(it: String?) {
@@ -83,9 +106,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun initView() {
-        binding = FragmentLoginBinding.inflate(layoutInflater)
-        val view = binding.root
-        activity?.setContentView(view)
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
@@ -94,19 +114,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             startActivity(Intent(context, DashboardActivity::class.java))
             activity?.finish()
         }
-
-
-//        navControler = Navigation.findNavController(view)
-
     }
 
     private fun attachBtn() {
         binding.ivLoginGoogle.setOnClickListener {
-            signIn()
+                signIn()
         }
 
-//        binding.tvLoginRegister.setOnClickListener{
-//            navControler.navigate(R.id.action_loginFragment_to_registerFragment)
-//        }
+        binding.btnLoginLogin.setOnClickListener {
+            viewModel.loginWithEmail(binding.etLoginEmail.text.toString(), binding.etLoginPassword.text.toString(), auth)
+        }
+
+        binding.tvLoginRegister.setOnClickListener{
+            navControler.navigate(R.id.action_loginFragment_to_registerFragment)
+        }
     }
 }
